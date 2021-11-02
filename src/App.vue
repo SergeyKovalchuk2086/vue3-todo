@@ -1,30 +1,38 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+	<div class="container">
+		<TodoList />
+		<ItemList />
+	</div>
 </template>
 
+<script>
+import TodoList from "@/components/TodoList.vue";
+import ItemList from "@/components/ItemList.vue";
+export default {
+	components: {
+		TodoList,
+		ItemList,
+	},
+	data() {
+		return {};
+	},
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	user-select: none;
+	font-family: "Lato", sans-serif;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.container {
+	display: flex;
+	justify-content: space-between;
+	max-width: 850px;
+	margin: 50px auto;
+	background-color: rgb(157, 172, 182);
 }
 </style>
