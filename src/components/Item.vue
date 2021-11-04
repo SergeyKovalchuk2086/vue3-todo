@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
 	components: {},
@@ -36,8 +36,10 @@ export default {
 
 		toItemList() {
 			this.currentTodo({
-				todo: this.todoData,
+				id: this.todoData.id,
+				title: this.todoData.title
 			});
+			
 		},
 	},
 };

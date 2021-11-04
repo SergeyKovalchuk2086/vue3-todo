@@ -11,6 +11,7 @@
 import TodoList from "@/components/TodoList.vue";
 import ItemList from "@/components/ItemList.vue";
 export default {
+	name: "Main",
 	components: {
 		TodoList,
 		ItemList,

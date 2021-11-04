@@ -1,37 +1,40 @@
 <template>
 	<div class="itemListContent">
-		<h1 class="listHeader">{{ content.title }}</h1>
+		<h1 class="listHeader" v-if="currentTodo">{{ currentTodo.title }}</h1>
 		<div class="content">
-			<p></p>
+			<p v-for="item in getTodoFromState" :key="item.id">{{ item.title }}</p>
 		</div>
 		<div class="addContent">
 			<my-input type="text" v-model="todo" class="input__text" placeholder="Введите дело..." />
 			<input type="checkbox" id="check" class="checkbox" />
 			<label for="check">Срочное дело</label>
-			<my-button @click="addTodoInList" class="add__todo">Добавить дело</my-button>
+			<my-button @click="addTodo" class="add__todo">Добавить дело</my-button>
 		</div>
 	</div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
 	data() {
 		return {
 			todo: "",
-			content: {},
 		};
 	},
 	computed: {
-		...mapGetters(["currentTodo"]),
+		...mapGetters(["currentTodo", "allTodo", "getTodoFromState"]),
 	},
 
 	methods: {
-		addTodoInList() {},
-	},
+		...mapMutations(["addTodoInList"]),
 
-	mounted() {
-		this.content = this.currentTodo;
+		addTodo() {
+			this.addTodoInList({
+				title: this.todo,
+				id: this.currentTodo.id,
+			});
+			this.todo = "";
+		},
 	},
 };
 </script>
