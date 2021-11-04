@@ -4,7 +4,7 @@
 		<div class="todo__list-filter"></div>
 
 		<!-- все списки дел -->
-		<Item v-for="todo in validTodos" :key="todo.id" :todoData="todo" />
+		<Item v-for="todo in allTodos" :key="todo.id" :todoData="todo" />
 
 		<!-- добавление списка дел -->
 		<AddItem />
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 import Item from "@/components/Item.vue";
 import AddItem from "@/components/AddItem.vue";
@@ -22,14 +22,14 @@ export default {
 		AddItem,
 	},
 
-	computed: mapGetters(["validTodos"]),
+	computed: mapGetters(["validTodos", "allTodos"]),
 	methods: {
 		...mapActions(["fetchTodos"]),
 	},
 
-	async mounted() {
-		this.fetchTodos();
-	},
+	// async mounted() {
+	// 	this.fetchTodos();
+	// },
 };
 </script>
 

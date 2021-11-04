@@ -1,5 +1,5 @@
 <template>
-	<div class="todo__list-items" @click="getIdTodo(todoData.id)">
+	<div class="todo__list-items" @click="toItemList">
 		<ul>
 			<li>
 				<p>{{ todoData.title }}</p>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations, Store } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
-	store: Store,
+	components: {},
 	props: {
 		todoData: {
 			type: Object,
@@ -24,11 +24,9 @@ export default {
 		},
 	},
 
-	computed: mapGetters(["validTodos"]),
-
 	methods: {
-		...mapActions(["addItem"]),
-		...mapMutations(["deleteTodo", "addItemInList"]),
+		...mapMutations(["deleteTodo"]),
+		...mapActions(["currentTodo"]),
 
 		deleteTodoItem() {
 			this.deleteTodo({
@@ -36,9 +34,9 @@ export default {
 			});
 		},
 
-		getIdTodo(id) {
-			this.addItemInList({
-				id: id,
+		toItemList() {
+			this.currentTodo({
+				todo: this.todoData,
 			});
 		},
 	},

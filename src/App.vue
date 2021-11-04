@@ -1,7 +1,9 @@
 <template>
 	<div class="container">
-		<TodoList />
-		<ItemList />
+		<!-- <router-view -->
+			<TodoList />
+			<ItemList />
+		<!-- </router-view> -->
 	</div>
 </template>
 
