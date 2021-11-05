@@ -22,17 +22,19 @@ export default {
 		},
 
 		addTodoInList(state, todo) {
-			console.log(todo);
 			state.todoList.push(todo);
+		},
+
+		deleteTodoFromList(state, index) {
+			state.todoList.splice(index, 1);
 		},
 	},
 	actions: {
 		currentTodo(ctx, todo) {
 			ctx.commit("setCurrentTodo", todo);
 		},
-
-		// getTodo(ctx) {
-		// 	ctx.commit("updateTodo");
-		// },
 	},
 };
+
+// let searchName = 'barry';
+// let index = inputArr.findIndex(el => el.name === searchName);

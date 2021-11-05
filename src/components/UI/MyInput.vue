@@ -20,8 +20,10 @@ export default {
 <style scoped>
 input[type="text"] {
 	margin: 5px 0;
-	/* min-width: 310px; */
 	height: 30px;
 	padding-left: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid black;
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
 	<div class="container">
-		<!-- <router-view -->
-			<TodoList />
-			<ItemList />
-		<!-- </router-view> -->
+		<TodoList />
+		<ItemList />
 	</div>
 </template>
 
@@ -34,8 +32,9 @@ export default {
 .container {
 	display: flex;
 	justify-content: space-between;
-	max-width: 850px;
+	max-width: 950px;
 	margin: 50px auto;
-	background-color: rgb(157, 172, 182);
+	border: 2px solid black;
+	background-color: #d7e8f0;
 }
 </style>

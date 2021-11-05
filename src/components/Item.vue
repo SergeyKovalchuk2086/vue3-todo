@@ -4,7 +4,7 @@
 			<li>
 				<p>{{ todoData.title }}</p>
 				<!-- удалить дело -->
-				<my-button @click="deleteTodoItem(id)" class="btnDelete" style="margin-right: 5px">&#10006;</my-button>
+				<my-button @click="deleteTodoItem" class="btnDelete" style="margin-right: 5px">&#10006;</my-button>
 			</li>
 		</ul>
 	</div>
@@ -22,24 +22,26 @@ export default {
 				return;
 			},
 		},
+		index: {
+			type: Number,
+			default() {
+				return;
+			},
+		},
 	},
-
 	methods: {
 		...mapMutations(["deleteTodo"]),
 		...mapActions(["currentTodo"]),
 
 		deleteTodoItem() {
-			this.deleteTodo({
-				id: this.id,
-			});
+			this.deleteTodo(this.index);
 		},
 
 		toItemList() {
 			this.currentTodo({
 				id: this.todoData.id,
-				title: this.todoData.title
+				title: this.todoData.title,
 			});
-			
 		},
 	},
 };
@@ -54,11 +56,12 @@ export default {
 
 .btnDelete {
 	width: 22px;
+	height: 23px;
 }
 
 li {
 	list-style: none;
-	border: 1px solid green;
+	/* border: 1px solid green; */
 	line-height: 25px;
 	padding-left: 10px;
 	max-width: 290px;
@@ -69,8 +72,9 @@ li {
 }
 
 li p {
-	width: 242px;
+	max-width: 242px;
 	word-wrap: break-word;
+	border-bottom: 1px solid black;
 }
 
 .todo__list-items {

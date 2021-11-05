@@ -1,28 +1,36 @@
 <template>
-	<div class="itemListContent">
+	<div class="itemListContent" v-if="currentTodo.id">
 		<h1 class="listHeader" v-if="currentTodo">{{ currentTodo.title }}</h1>
 		<div class="content">
-			<p v-for="item in getTodoFromState" :key="item.id">{{ item.title }}</p>
+			<TodoInfo v-for="(item, index) in getTodoFromState" :key="item.id" :todoInfo="item" :index="index" />
 		</div>
+
 		<div class="addContent">
 			<my-input type="text" v-model="todo" class="input__text" placeholder="Введите дело..." />
-			<input type="checkbox" id="check" class="checkbox" />
+			<input type="checkbox" id="check" v-model="checkBox" class="checkbox" />
 			<label for="check">Срочное дело</label>
 			<my-button @click="addTodo" class="add__todo">Добавить дело</my-button>
 		</div>
 	</div>
+	<div v-else class="noTodoList">No Todo List :(</div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import TodoInfo from "./TodoInfo.vue";
+
 export default {
+	components: {
+		TodoInfo,
+	},
 	data() {
 		return {
 			todo: "",
+			checkBox: false,
 		};
 	},
 	computed: {
-		...mapGetters(["currentTodo", "allTodo", "getTodoFromState"]),
+		...mapGetters(["currentTodo", "allTodo", "getTodoFromState", "allTodos"]),
 	},
 
 	methods: {
@@ -32,8 +40,12 @@ export default {
 			this.addTodoInList({
 				title: this.todo,
 				id: this.currentTodo.id,
+				idDelete: Date.now(),
+				checked: this.checkBox,
+				time: new Date(),
 			});
 			this.todo = "";
+			this.checkBox = false;
 		},
 	},
 };
@@ -41,9 +53,8 @@ export default {
 
 <style>
 .itemListContent {
-	border: 1px solid orangered;
-	width: 500px;
-	height: 300px;
+	width: 600px;
+	height: 500px;
 	padding: 5px;
 	position: relative;
 }
@@ -52,31 +63,33 @@ export default {
 	text-align: center;
 }
 
-.content {
-	display: flex;
-}
-
 .addContent {
 	position: absolute;
 	bottom: 0;
 	display: flex;
-	width: 480px;
+	width: 560px;
 	align-items: center;
 }
 
 .checkbox {
-	margin: 0 5px 0 15px;
+	margin: 0 15px 0 15px;
 }
 
 label {
-	margin-right: 15px;
+	min-width: 110px;
+	font-size: 16px;
+	margin-right: 10px;
 }
 
 .add__todo {
-	width: 100px;
+	min-width: 150px;
 }
 
 .input__text {
-	width: 200px;
+	width: 247px;
+}
+
+.noTodoList {
+	margin: auto;
 }
 </style>
